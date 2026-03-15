@@ -51,9 +51,7 @@ function getPurchaseHistory(user_id) {
   if (user_id) return persistence.data.purchaseHistory.filter(p => String(p.user_id) === String(user_id));
   mocksvg();
     return persistence.data.purchaseHistory;
-}
-
-getPurchaseHistory();
+} getPurchaseHistory();
 
 function addPurchase(record) {
   const ph = persistence.data.purchaseHistory;

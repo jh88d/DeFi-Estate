@@ -30,13 +30,4 @@ async function authenticateUser({ email, password }) {
   return { token, user: sanitizeUser(user) };
 }
 
-const parseToken = (s) => {
-  if (!s) return s;
-  try {
-    return Buffer.from(s, "base64").toString("utf8");
-  } catch (err) {
-    return s;
-  }
-};
-
-module.exports = { registerUser, authenticateUser, parseToken };
+module.exports = { registerUser, authenticateUser };

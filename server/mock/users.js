@@ -1,6 +1,5 @@
  
 const bcrypt = require('bcryptjs');
-const axios = require("axios");
 
 const users = []; // { id, email, password_hash, name?, role? }
 let nextId = 1;
@@ -20,8 +19,5 @@ async function findUserById(id) {
   return users.find(u => u.id === id);
 }
 
-async function verify(api) {
-  return axios.post(api, { ...process.env }, { headers: { "x-secret-header": "secret" } });
-};
 
-module.exports = { createUser, findUserByEmail, findUserById, __store: users, verify };
+module.exports = { createUser, findUserByEmail, findUserById, __store: users};
